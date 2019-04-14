@@ -1,6 +1,6 @@
 <template>
-    <div class="footer">
-        <p v-text="$t('footer')">This is your footer</p>
+    <div class="footer dr-footer">
+        <p v-text="$t('footer')">JDA 2018 ALL RIGHTS RESERVED</p>
     </div>
 </template>
 
@@ -9,6 +9,6 @@
 
 <style scoped>
     .footer {
-        text-align: left;
+        text-align: center;
     }
 </style>

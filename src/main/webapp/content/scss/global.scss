@@ -1,6 +1,42 @@
 @import 'bootstrap-variables';
 
 /* ==============================================================
+Custom CSS - Main Page
+===============================================================*/
+
+html,
+body,
+#app {
+  min-height: 100vh;
+}
+
+.flex-container {
+  height: calc(100vh - 105px);
+}
+
+.router-view {
+  max-height: calc(100vh - 105px);
+  overflow-y: scroll;
+}
+
+/* ==============================================================
+Custom CSS - Styles
+===============================================================*/
+
+.dr-nav-header {
+  background-color: #009990;
+  color: #000;
+}
+
+.dr-nav-sidebar {
+  background-color: #eee;
+  color: #28a745;
+}
+
+dr-footer {
+}
+
+/* ==============================================================
 Bootstrap tweaks
 ===============================================================*/
 
@@ -50,14 +86,6 @@ Browser Upgrade Prompt
 Main page styles
 ========================================================================== */
 
-.hipster.img-fluid {
-  display: inline-block;
-  width: 347px;
-  height: 497px;
-  background: url('../images/jhipster_family_member_0.svg') no-repeat center top;
-  background-size: contain;
-}
-
 /* wait autoprefixer update to allow simple generation of high pixel density media query */
 @media only screen and (-webkit-min-device-pixel-ratio: 2),
   only screen and (min--moz-device-pixel-ratio: 2),
@@ -66,7 +94,6 @@ Main page styles
   only screen and (min-resolution: 192dpi),
   only screen and (min-resolution: 2dppx) {
   .hipster {
-    background: url('../images/jhipster_family_member_0.svg') no-repeat center top;
     background-size: contain;
   }
 }

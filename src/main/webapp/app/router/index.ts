@@ -25,6 +25,12 @@ const JhiAuditsComponent = () => import('../admin/audits/audits.vue');
 const JhiMetricsComponent = () => import('../admin/metrics/metrics.vue');
 const JhiTrackerComponent = () => import('../admin/tracker/tracker.vue');
 /* tslint:disable */
+// prettier-ignore
+const Node = () => import('../entities/node/node.vue');
+// prettier-ignore
+const NodeUpdate = () => import('../entities/node/node-update.vue');
+// prettier-ignore
+const NodeDetails = () => import('../entities/node/node-details.vue');
 // jhipster-needle-add-entity-to-router-import - JHipster will import entities to the router here
 
 Vue.use(Router);
@@ -147,6 +153,31 @@ export default new Router({
       name: 'JhiTrackerComponent',
       component: JhiTrackerComponent,
       meta: { authorities: ['ROLE_ADMIN'] }
+    }
+    ,
+    {
+      path: '/entity/node',
+      name: 'Node',
+      component: Node,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/node/new',
+      name: 'NodeCreate',
+      component: NodeUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/node/:nodeId/edit',
+      name: 'NodeEdit',
+      component: NodeUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/node/:nodeId/view',
+      name: 'NodeView',
+      component: NodeDetails,
+      meta: { authorities: ['ROLE_USER'] }
     }
     // jhipster-needle-add-entity-to-router - JHipster will add entities to the router here
   ]

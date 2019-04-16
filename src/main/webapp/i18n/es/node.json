@@ -1,0 +1,26 @@
+{
+  "deepRestApp": {
+    "node": {
+      "home": {
+        "title": "Nodes",
+        "createLabel": "Crear nuevo Node",
+        "createOrEditLabel": "Crear o editar Node"
+      },
+      "created": "Un nuevo Node ha sido creado con el identificador {{ param }}",
+      "updated": "Un Node ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Node ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Node {{ id }}?"
+      },
+      "detail": {
+        "title": "Node"
+      },
+      "name": "Name",
+      "description": "Description",
+      "ip": "Ip",
+      "user": "User",
+      "password": "Password",
+      "port": "Port"
+    }
+  }
+}

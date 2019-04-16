@@ -1,6 +1,42 @@
 @import 'bootstrap-variables';
 
 /* ==============================================================
+Custom CSS - Main Page
+===============================================================*/
+
+html,
+body,
+#app {
+  min-height: 100vh;
+}
+
+.flex-container {
+  height: calc(100vh - 105px);
+}
+
+.router-view {
+  max-height: calc(100vh - 105px);
+  overflow-y: scroll;
+}
+
+/* ==============================================================
+Custom CSS - Styles
+===============================================================*/
+
+.dr-nav-header {
+  background-color: #009990;
+  color: #000;
+}
+
+.dr-nav-sidebar {
+  background-color: #eee;
+  color: #28a745;
+}
+
+dr-footer {
+}
+
+/* ==============================================================
 Bootstrap tweaks
 ===============================================================*/
 

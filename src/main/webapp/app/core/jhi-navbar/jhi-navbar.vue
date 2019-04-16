@@ -1,5 +1,5 @@
 <template>
-    <b-navbar toggleable="md" type="dark" class="jh-navbar">
+    <b-navbar toggleable="md" type="dark" class="jh-navbar dr-nav-header">
         <div class="jh-logo-container float-left">
             <b-navbar-toggle right class="jh-navbar-toggler d-lg-none float-right" href="javascript:void(0);"  data-toggle="collapse" target="header-tabs" aria-expanded="false" aria-label="Toggle navigation">
                 <font-awesome-icon icon="bars" />
@@ -138,11 +138,9 @@
     ========================================================================== */
 .navbar-version {
   font-size: 10px;
-  color: #ccc;
 }
 
 .jh-navbar {
-  background-color: #353d47;
   padding: 0.2em 1em;
 }
 
@@ -176,7 +174,6 @@
 }
 
 .jh-navbar .jh-navbar-toggler {
-  color: #ccc;
   font-size: 1.5em;
   padding: 10px;
 }
@@ -206,14 +203,12 @@
 .navbar-title {
   display: inline-block;
   vertical-align: middle;
-  color: white;
 }
 /* waiting for bootstrap fix bug on nav-item-dropdown a:active
 https://github.com/bootstrap-vue/bootstrap-vue/issues/2219
 */
 nav li.router-link-active .navbar-dropdown-menu {
   cursor: pointer;
-  color: #fff;
 }
 
 /* ==========================================================================

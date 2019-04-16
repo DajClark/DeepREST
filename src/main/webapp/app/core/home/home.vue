@@ -1,9 +1,6 @@
 <template>
     <div class="home row">
-        <div class="col-md-3">
-            <span class="hipster img-fluid rounded"></span>
-        </div>
-        <div class="col-md-9">
+        <div class="col-md-12">
             <h1 class="display-4" v-text="$t('home.title')">Welcome, Java Hipster!</h1>
             <p class="lead" v-text="$t('home.subtitle')">This is your homepage</p>
 
@@ -31,6 +28,8 @@
                 <li><a href="http://stackoverflow.com/tags/jhipster/info" target="_blank" rel="noopener" v-text="$t('home.link.stackoverflow')">JHipster on Stack Overflow</a></li>
                 <li><a href="https://github.com/jhipster/generator-jhipster/issues?state=open" target="_blank" rel="noopener" v-text="$t('home.link.bugtracker')">JHipster bug tracker</a></li>
                 <li><a href="https://gitter.im/jhipster/generator-jhipster" target="_blank" rel="noopener" v-text="$t('home.link.chat')">JHipster public chat room</a></li>
+
+
                 <li><a href="https://twitter.com/java_hipster" target="_blank" rel="noopener" v-text="$t('home.link.follow')">follow @java_hipster on Twitter</a></li>
             </ul>
 

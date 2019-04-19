@@ -110,6 +110,7 @@ export function initVueXStore(vue) {
       ribbonOnProfiles: '',
       activeProfiles: '',
       currentLanguage: 'en',
+      currentNodeID: null,
       languages: {
         en: { name: 'English' },
         fr: { name: 'Français' },
@@ -157,6 +158,9 @@ export function initVueXStore(vue) {
       },
       setRibbonOnProfiles(state, ribbon) {
         state.ribbonOnProfiles = ribbon;
+      },
+      currentNodeID(state, currentNodeID) {
+        state.currentNodeID = currentNodeID;
       }
     },
     getters: {
@@ -170,7 +174,8 @@ export function initVueXStore(vue) {
       account: state => state.userIdentity,
       authenticated: state => state.authenticated,
       activeProfiles: state => state.activeProfiles,
-      ribbonOnProfiles: state => state.ribbonOnProfiles
+      ribbonOnProfiles: state => state.ribbonOnProfiles,
+      currentNodeID: state => state.currentNodeID
     }
   });
 }

@@ -3,10 +3,27 @@ import axios from 'axios';
 import buildPaginationQueryOpts from '@/shared/sort/sorts';
 
 import { INode } from '@/shared/model/node.model';
+import Vue from 'vue';
+import * as config from '@/shared/config/config';
 
 const baseApiUrl = 'api/nodes';
 
 export default class NodeService {
+  private store = config.initVueXStore(Vue);
+
+  public refreshCurrentNode(currentNodeID): Promise<INode> {
+    if (currentNodeID != null) {
+      this.store.commit('currentNodeID', currentNodeID);
+    }
+
+    let currentID = this.store.getters.currentNodeID;
+    return new Promise<INode>(resolve => {
+      axios.get(`${baseApiUrl}/${currentID}`).then(function(res) {
+        resolve(res.data);
+      });
+    });
+  }
+
   public find(id): Promise<INode> {
     return new Promise<INode>(resolve => {
       axios.get(`${baseApiUrl}/${id}`).then(function(res) {

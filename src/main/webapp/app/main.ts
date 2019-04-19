@@ -42,6 +42,7 @@ const trackerService = new TrackerService(router);
 const translationService = new TranslationService(store, i18n);
 const loginService = new LoginService();
 const accountService = new AccountService(store, translationService, trackerService, router);
+const nodeService = new NodeService();
 
 router.beforeEach((to, from, next) => {
   if (!to.matched.length) {
@@ -82,7 +83,7 @@ new Vue({
     trackerService: () => trackerService,
     alertService: () => alertService,
     translationService: () => translationService,
-    nodeService: () => new NodeService(),
+    nodeService: () => nodeService,
     // jhipster-needle-add-entity-service-to-main - JHipster will import entities services here
     accountService: () => accountService
   },

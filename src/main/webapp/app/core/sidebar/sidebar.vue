@@ -1,38 +1,38 @@
 <template>
     <b-navbar id="sidebar"  class="sidebar dr-nav-sidebar" v-if="authenticated">
-            <b-navbar-nav>
-                <b-nav-item-dropdown
-                    id="node-menu"
-                    active-class="active"
-                    class="pointer sidebar-dropdown"
-                    >
-                    <span slot="button-content"  class="navbar-dropdown-menu" v-on:click="sidebarExpand()">
-                        <font-awesome-icon icon="hdd"/>
-                        <span v-text="$t('sidebar.nodes')">Node</span>
-                    </span>
-                    <b-dropdown-item>
-                        <span>Server</span>
-                    </b-dropdown-item>
-                    <b-dropdown-item>
-                        <span>Raspberry Pi</span>
-                    </b-dropdown-item>
-                    <b-dropdown-item>
-                        <span>Node 3</span>
-                    </b-dropdown-item>
-                </b-nav-item-dropdown>
-                <b-nav-item class="sidebar-item" to="/node/endpoints" exact>
+        <b-navbar-nav class="sidebar-head">
+            <b-nav-item-dropdown
+                id="node-menu"
+                active-class="active"
+                class="pointer sidebar-dropdown"
+                >
+                <span slot="button-content"  class="navbar-dropdown-menu" v-on:click="sidebarExpand(), retrieveAllNodes()">
+                    <font-awesome-icon icon="hdd"/>
+                    <span v-text="$t('sidebar.nodes')">Node</span>
+                </span>
+                <!--<b-dropdown-item v-for="node of orderBy(nodes, propOrder, reverse === true ? 1 : -1)"-->
+                                 <!--:key="node.id" v-on:click="setCurrentNode(key)">-->
+                    <!--<span v-on:click="setCurrentNode(node.id)">{{node.id}} {{node.name}}</span>-->
+                <!--</b-dropdown-item>-->
+                <b-dropdown-item v-for="(value) in nodes" :key="value.id" v-on:click="refreshCurrentNode(parseInt(value.id));">
+                    {{value.name}}
+                </b-dropdown-item>
+            </b-nav-item-dropdown>
+
+            <span class="node-title">{{currentNode.name}}</span>
+                <b-nav-item v-if="currentNode.id != null" class="sidebar-item" to="/node/endpoints" exact>
                     <span>
                         <font-awesome-icon icon="th-list"/>
                         <span v-text="$t('sidebar.endpoints')">Endpoints</span>
                     </span>
                 </b-nav-item>
-                <b-nav-item to="/node/settings" exact>
+                <b-nav-item v-if="currentNode.id != null" to="/node/settings" exact>
                     <span>
                         <font-awesome-icon icon="wrench"/>
                         <span v-text="$t('sidebar.settings')">Settings</span>
                     </span>
                 </b-nav-item>
-            </b-navbar-nav>
+        </b-navbar-nav>
         <button type="button" v-on:click="sidebarCollapse()" class="btn btn-collapse">
             <font-awesome-icon icon="arrow-left"/>
         </button>
@@ -54,6 +54,24 @@
         max-width: 200px;
         transition: all 0.2s;
         height: 100%;
+    }
+
+    .node-title {
+        padding-top: 30px;
+    }
+    .sidebar-head {
+        background-color: #ddd;
+        height: 80px;
+        width: 100%;
+    }
+
+    .b-navbar ul {
+
+    }
+
+    .sidebar {
+        height: 100%;
+        top: 0 !important;
     }
 
     #sidebar .navbar-nav {

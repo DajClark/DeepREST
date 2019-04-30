@@ -1,7 +1,7 @@
 {
   "home": {
     "title": "Welcome, Java Hipster!",
-    "subtitle": "This is your homepage",
+    "subtitle": "DeepREST is a web application for creating and managing REST services quickly and intuitively. Enjoy!",
     "logged": {
       "message": "You are logged in as user \"{{username}}\"."
     },
@@ -14,6 +14,7 @@
       "follow": "follow @java_hipster on Twitter"
     },
     "like": "If you like JHipster, don't forget to give us a star on",
-    "github": "GitHub"
+    "github": "GitHub",
+    "hello": "Welcome to DeepREST."
   }
 }

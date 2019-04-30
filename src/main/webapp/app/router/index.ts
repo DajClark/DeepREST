@@ -33,6 +33,11 @@ const NodeUpdate = () => import('../entities/node/node-update.vue');
 const NodeDetails = () => import('../entities/node/node-details.vue');
 // jhipster-needle-add-entity-to-router-import - JHipster will import entities to the router here
 
+//Custom imports
+const Endpoint = () => import('../entities/endpoint/endpoint.vue');
+const EndpointUpdate = () => import('../entities/endpoint/endpoint-update.vue');
+const EndpointDetails = () => import('../entities/endpoint/endpoint-details.vue');
+
 Vue.use(Router);
 
 // prettier-ignore
@@ -180,5 +185,30 @@ export default new Router({
       meta: { authorities: ['ROLE_USER'] }
     }
     // jhipster-needle-add-entity-to-router - JHipster will add entities to the router here
+    ,
+    {
+      path: '/entity/:nodeId/endpoints',
+      name: 'Endpoints',
+      component: Endpoint,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/:nodeId/endpoints/new',
+      name: 'EndpointCreate',
+      component: EndpointUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/:nodeId/endpoints/:endpointId/edit',
+      name: 'EndpointEdit',
+      component: EndpointUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/:nodeId/endpoints/:endpointId/view',
+      name: 'EndpointView',
+      component: EndpointDetails,
+      meta: { authorities: ['ROLE_USER'] }
+    }
   ]
 });

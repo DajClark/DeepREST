@@ -6,7 +6,8 @@
             </b-navbar-toggle>
             <b-navbar-brand class="logo float-left" b-link to="/">
                 <span class="logo-img"></span>
-                <span v-text="$t('global.title')" class="navbar-title">DeepREST</span> <span class="navbar-version">{{version}}</span>
+                <span v-text="$t('global.title')" class="navbar-title">DeepREST</span>
+                <!--<span class="navbar-version">{{version}}</span>-->
             </b-navbar-brand>
         </div>
         <b-collapse is-nav id="header-tabs">
@@ -199,6 +200,7 @@
 .navbar-title {
   display: inline-block;
   vertical-align: middle;
+    font-size: 1.5em;
 }
 /* waiting for bootstrap fix bug on nav-item-dropdown a:active
 https://github.com/bootstrap-vue/bootstrap-vue/issues/2219
@@ -211,11 +213,11 @@ nav li.router-link-active .navbar-dropdown-menu {
     Logo styles
     ========================================================================== */
 .navbar-brand.logo {
-  padding: 5px 15px;
+  padding: 1px 5px;
 }
 
 .logo .logo-img {
-  height: 45px;
+  height: 60px;
   display: inline-block;
   vertical-align: middle;
   width: 70px;

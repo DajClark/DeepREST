@@ -10,23 +10,18 @@
                     <font-awesome-icon icon="hdd"/>
                     <span v-text="$t('sidebar.nodes')">Node</span>
                 </span>
-                <!--<b-dropdown-item v-for="node of orderBy(nodes, propOrder, reverse === true ? 1 : -1)"-->
-                                 <!--:key="node.id" v-on:click="setCurrentNode(key)">-->
-                    <!--<span v-on:click="setCurrentNode(node.id)">{{node.id}} {{node.name}}</span>-->
-                <!--</b-dropdown-item>-->
                 <b-dropdown-item v-for="(value) in nodes" :key="value.id" v-on:click="refreshCurrentNode(parseInt(value.id));">
                     {{value.name}}
                 </b-dropdown-item>
             </b-nav-item-dropdown>
-
             <span class="node-title">{{currentNode.name}}</span>
-                <b-nav-item v-if="currentNode.id != null" class="sidebar-item" to="/node/endpoints" exact>
-                    <span>
-                        <font-awesome-icon icon="th-list"/>
-                        <span v-text="$t('sidebar.endpoints')">Endpoints</span>
-                    </span>
-                </b-nav-item>
-                <b-nav-item v-if="currentNode.id != null" to="/node/settings" exact>
+            <router-link :to="{name: 'Endpoints', params: {nodeId: currentNode.id}}" v-if="currentNode.id != null" class="sidebar-item">
+                <span v-on:click="refresh()">
+                    <font-awesome-icon icon="th-list"/>
+                    <span v-text="$t('sidebar.endpoints')">Endpoints</span>
+                </span>
+            </router-link>
+                <b-nav-item v-if="currentNode.id != null" to="/node/settings">
                     <span>
                         <font-awesome-icon icon="wrench"/>
                         <span v-text="$t('sidebar.settings')">Settings</span>

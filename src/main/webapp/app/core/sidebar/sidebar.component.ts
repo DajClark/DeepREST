@@ -61,4 +61,11 @@ export default class Sidebar extends Vue {
   public sidebarExpand(): void {
     $('#sidebar.active').removeClass('active');
   }
+
+  public refresh(): void {
+    setTimeout(() => {
+      window.location.reload();
+      console.log(this.$route.params.nodeId);
+    }, 100);
+  }
 }

@@ -26,6 +26,7 @@ import ConfigurationService from '@/admin/configuration/configuration.service';
 import TrackerService from './admin/tracker/tracker.service';
 import NodeService from '@/entities/node/node.service';
 import EndpointService from '@/entities/endpoint/endpoint.service';
+import PluginService from '@/entities/endpoint/plugins.service';
 // jhipster-needle-add-entity-service-to-main-import - JHipster will import entities services here
 
 Vue.config.productionTip = false;
@@ -45,6 +46,7 @@ const loginService = new LoginService();
 const accountService = new AccountService(store, translationService, trackerService, router);
 const nodeService = new NodeService();
 const endpointService = new EndpointService();
+const pluginService = new PluginService();
 
 router.beforeEach((to, from, next) => {
   if (!to.matched.length) {
@@ -87,6 +89,7 @@ new Vue({
     translationService: () => translationService,
     nodeService: () => nodeService,
     endpointService: () => endpointService,
+    pluginService: () => pluginService,
     // jhipster-needle-add-entity-service-to-main - JHipster will import entities services here
     accountService: () => accountService
   },

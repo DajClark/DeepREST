@@ -6,7 +6,9 @@ import AlertService from '@/shared/alert/alert.service';
 import { INode, Node } from '@/shared/model/node.model';
 import EndpointService from '@/entities/endpoint/endpoint.service';
 import { IEndpoint, Endpoint } from '@/shared/model/endpoint.model';
+import PluginService from '@/entities/endpoint/plugins.service';
 import NodeService from '@/entities/node/node.service';
+import { IPlugin, Plugin } from '@/shared/model/plugin.model';
 
 const validations: any = {
   endpoint: {
@@ -27,18 +29,26 @@ export default class EndpointUpdate extends Vue {
   private alertService: () => AlertService;
   @Inject('endpointService')
   private endpointService: () => EndpointService;
+  public endpoint: IEndpoint = new Endpoint();
   @Inject('nodeService')
   private nodeService: () => NodeService;
   public node: INode = {};
-  public endpoint: IEndpoint = new Endpoint();
+  @Inject('pluginService')
+  private pluginService: () => PluginService;
+  public plugins: IPlugin[] = [];
+  public currentPlugin: IPlugin = new Plugin();
   public isSaving = false;
   public endpointURL: string = null;
+  public pluginsURL: string = null;
   public endpointID: string = null;
 
   beforeRouteEnter(to, from, next) {
     next(vm => {
       if (to.params.endpointId) {
         vm.retrieveEndpoint(to.params.nodeId);
+        vm.retrieveAllPlugins();
+      } else {
+        vm.retrieveAllPlugins();
       }
     });
   }
@@ -84,9 +94,42 @@ export default class EndpointUpdate extends Vue {
       });
   }
 
+  public retrieveAllPlugins(): void {
+    this.nodeService()
+      .find(this.$route.params.nodeId)
+      .then(res => {
+        this.node = res;
+        this.pluginsURL = this.pluginService().createPluginURL(this.node);
+        this.pluginService()
+          .retrieve(this.pluginsURL)
+          .then(res => {
+            this.plugins = res.data;
+            var index;
+            for (index = 0; index < this.plugins.length; ++index) {
+              if (this.endpoint.getResource['name'] === this.plugins[index].name) {
+                console.log(this.endpoint.getResource['name']);
+                this.getPlugin(index);
+              }
+            }
+          });
+      });
+  }
+
+  public getPlugin(id): void {
+    this.nodeService()
+      .find(this.node.id)
+      .then(res => {
+        this.node = res;
+        this.pluginsURL = this.pluginService().createPluginURL(this.node);
+        this.pluginService()
+          .find(this.pluginsURL, id)
+          .then(res => {
+            this.currentPlugin = res;
+          });
+      });
+  }
+
   public previousState(): void {
     this.$router.go(-1);
   }
-
-  public initRelationships(): void {}
 }

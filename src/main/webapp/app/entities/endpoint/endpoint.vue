@@ -1,5 +1,8 @@
 <template>
     <div>
+        <h2>{{node.name}}</h2>
+        <hr>
+        <br>
         <h2 id="page-heading">
             <span v-text="$t('deepRestApp.endpoint.home.title')" id="endpoint-heading">Endpoints</span>
             <router-link :to="{name: 'EndpointCreate'}" tag="button" id="jh-create-endpoint" class="btn btn-primary float-right jh-create-endpoint create-endpoint">

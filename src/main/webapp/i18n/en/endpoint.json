@@ -4,7 +4,9 @@
       "home": {
         "title": "Endpoints",
         "createLabel": "Create a New Endpoint",
-        "createOrEditLabel": "Create or edit an Endpoint"
+        "createOrEditLabel": "Create or edit an Endpoint",
+        "plugin": "Plugin",
+        "selectPlugin": "Select Plugin"
       },
       "created": "A new Endpoint was created on the Node with identifier {{ param }}",
       "updated": "An Endpoint was updated with on the Node with identifier {{ param }}",

@@ -54,8 +54,8 @@ export default class EndpointUpdate extends Vue {
 
   public save(): void {
     this.isSaving = true;
-    if (this.endpoint.name) {
-      this.endpointID = this.$route.params.endpointId;
+    this.endpointID = this.$route.params.endpointId;
+    if (this.endpointID != undefined) {
       this.endpointURL = this.endpointService().createEndpointUpdateURL(this.node, this.endpointID);
       this.endpointService()
         .update(this.endpointURL, this.endpoint)
@@ -68,7 +68,7 @@ export default class EndpointUpdate extends Vue {
     } else {
       this.endpointURL = this.endpointService().createEndpointURL(this.node);
       this.endpointService()
-        .create(this.$route.params.nodeId, this.endpoint)
+        .create(this.endpointURL, this.endpoint)
         .then(param => {
           this.isSaving = false;
           this.$router.go(-1);

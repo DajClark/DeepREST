@@ -42,6 +42,12 @@ export default class EndpointUpdate extends Vue {
   public pluginsURL: string = null;
   public endpointID: string = null;
 
+  GET = 0;
+  POST = 1;
+  PUT = 2;
+  PATCH = 3;
+  DELETE = 4;
+
   created() {
     if (this.$route.params.endpointId) {
       this.retrieveEndpoint(this.$route.params.nodeId).then(() => {
@@ -152,31 +158,36 @@ export default class EndpointUpdate extends Vue {
   public async setPlugin(method, key) {
     return await this.getPlugin(key).then(res => {
       switch (method) {
-        case 0:
+        case 0: {
           this.endpoint.getResource['name'] = res.name;
           this.endpoint.getResource['params'] = this.generatePluginJSON(res);
           this.currentPlugins.getPlugin = res;
           break;
-        case 1:
+        }
+        case 1: {
           this.endpoint.postResource['name'] = res.name;
           this.endpoint.postResource['params'] = this.generatePluginJSON(res);
           this.currentPlugins.postPlugin = res;
           break;
-        case 2:
+        }
+        case 2: {
           this.endpoint.putResource['name'] = res.name;
           this.endpoint.putResource['params'] = this.generatePluginJSON(res);
           this.currentPlugins.putPlugin = res;
           break;
-        case 3:
+        }
+        case 3: {
           this.endpoint.patchResource['name'] = res.name;
           this.endpoint.patchResource['params'] = this.generatePluginJSON(res);
           this.currentPlugins.patchPlugin = res;
           break;
-        case 4:
+        }
+        case 4: {
           this.endpoint.deleteResource['name'] = res.name;
           this.endpoint.deleteResource['params'] = this.generatePluginJSON(res);
           this.currentPlugins.deletePlugin = res;
           break;
+        }
       }
     });
   }

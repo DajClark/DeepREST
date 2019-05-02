@@ -40,7 +40,7 @@
                             <b-tabs pills card vertical>
                                 <b-tab title="GET" active>
                                     <b-dropdown id="dropdown-2" text="Select Plugin" class="m-md-4">
-                                        <b-dropdown-item v-for="(plugin, key) in plugins"v-on:click="setPlugin(0, key)">{{plugin.name}} - {{plugin.details}}</b-dropdown-item>
+                                        <b-dropdown-item v-for="(plugin, key) in plugins"v-on:click="setPlugin(GET, key)">{{plugin.name}} - {{plugin.details}}</b-dropdown-item>
                                     </b-dropdown>
                                     <h1>{{currentPlugins.getPlugin["name"]}}</h1>
                                     <div v-for="(param, key) in currentPlugins.getPlugin.params" class="form-group">
@@ -50,7 +50,7 @@
                                 </b-tab>
                                 <b-tab title="POST">
                                     <b-dropdown id="dropdown-2" text="Select Plugin" class="m-md-4">
-                                        <b-dropdown-item v-for="(plugin, key) in plugins"v-on:click="setPlugin(1, key)">{{plugin.name}} - {{plugin.details}}</b-dropdown-item>
+                                        <b-dropdown-item v-for="(plugin, key) in plugins"v-on:click="setPlugin(POST, key)">{{plugin.name}} - {{plugin.details}}</b-dropdown-item>
                                     </b-dropdown>
                                     <h1>{{currentPlugins.postPlugin["name"]}}</h1>
                                     <div v-for="(param, key) in currentPlugins.postPlugin.params" class="form-group">
@@ -60,7 +60,7 @@
                                 </b-tab>
                                 <b-tab title="PUT">
                                     <b-dropdown id="dropdown-2" text="Select Plugin" class="m-md-4">
-                                        <b-dropdown-item v-for="(plugin, key) in plugins"v-on:click="setPlugin(2, key)">{{plugin.name}} - {{plugin.details}}</b-dropdown-item>
+                                        <b-dropdown-item v-for="(plugin, key) in plugins"v-on:click="setPlugin(PUT, key)">{{plugin.name}} - {{plugin.details}}</b-dropdown-item>
                                     </b-dropdown>
                                     <h1>{{currentPlugins.putPlugin["name"]}}</h1>
                                     <div v-for="(param, key) in currentPlugins.putPlugin.params" class="form-group">
@@ -70,7 +70,7 @@
                                 </b-tab>
                                 <b-tab title="PATCH">
                                     <b-dropdown id="dropdown-2" text="Select Plugin" class="m-md-4">
-                                        <b-dropdown-item v-for="(plugin, key) in plugins"v-on:click="setPlugin(3, key)">{{plugin.name}} - {{plugin.details}}</b-dropdown-item>
+                                        <b-dropdown-item v-for="(plugin, key) in plugins"v-on:click="setPlugin(PATCH, key)">{{plugin.name}} - {{plugin.details}}</b-dropdown-item>
                                     </b-dropdown>
                                     <h1>{{currentPlugins.patchPlugin["name"]}}</h1>
                                     <div v-for="(param, key) in currentPlugins.patchPlugin.params" class="form-group">
@@ -80,7 +80,7 @@
                                 </b-tab>
                                 <b-tab title="DELETE">
                                     <b-dropdown id="dropdown-2" text="Select Plugin" class="m-md-4">
-                                        <b-dropdown-item v-for="(plugin, key) in plugins"v-on:click="setPlugin(4, key)">{{plugin.name}} - {{plugin.details}}</b-dropdown-item>
+                                        <b-dropdown-item v-for="(plugin, key) in plugins"v-on:click="setPlugin(DELETE, key)">{{plugin.name}} - {{plugin.details}}</b-dropdown-item>
                                     </b-dropdown>
                                     <h1>{{currentPlugins.deletePlugin["name"]}}</h1>
                                     <div v-for="(param, key) in currentPlugins.deletePlugin.params" class="form-group">

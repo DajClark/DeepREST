@@ -42,6 +42,12 @@ export default class EndpointUpdate extends Vue {
   public pluginsURL: string = null;
   public endpointID: string = null;
 
+  GET = 0;
+  POST = 1;
+  PUT = 2;
+  PATCH = 3;
+  DELETE = 4;
+
   created() {
     if (this.$route.params.endpointId) {
       this.retrieveEndpoint(this.$route.params.nodeId).then(() => {
@@ -54,8 +60,8 @@ export default class EndpointUpdate extends Vue {
 
   public save(): void {
     this.isSaving = true;
-    if (this.endpoint.name) {
-      this.endpointID = this.$route.params.endpointId;
+    this.endpointID = this.$route.params.endpointId;
+    if (this.endpointID != undefined) {
       this.endpointURL = this.endpointService().createEndpointUpdateURL(this.node, this.endpointID);
       this.endpointService()
         .update(this.endpointURL, this.endpoint)
@@ -68,7 +74,7 @@ export default class EndpointUpdate extends Vue {
     } else {
       this.endpointURL = this.endpointService().createEndpointURL(this.node);
       this.endpointService()
-        .create(this.$route.params.nodeId, this.endpoint)
+        .create(this.endpointURL, this.endpoint)
         .then(param => {
           this.isSaving = false;
           this.$router.go(-1);
@@ -93,21 +99,20 @@ export default class EndpointUpdate extends Vue {
       });
   }
 
-  public retrieveAllPlugins(): void {
-    this.nodeService()
+  public async retrieveAllPlugins() {
+    await this.nodeService()
       .find(this.$route.params.nodeId)
-      .then(res => {
+      .then(async res => {
         this.node = res;
         this.pluginsURL = this.pluginService().createPluginURL(this.node);
-        this.pluginService()
+        await this.pluginService()
           .retrieve(this.pluginsURL)
-          .then(res => {
+          .then(async res => {
             this.plugins = res.data;
             var index;
-            console.log(this.endpoint);
             for (index = 0; index < this.plugins.length; ++index) {
               if (this.endpoint.getResource['name'] === this.plugins[index].name)
-                this.getPlugin(index).then(res => {
+                await this.getPlugin(index).then(res => {
                   this.currentPlugins.getPlugin = res;
                 });
 
@@ -136,17 +141,54 @@ export default class EndpointUpdate extends Vue {
   }
 
   public async getPlugin(id) {
-    return this.nodeService()
+    return await this.nodeService()
       .find(this.node.id)
-      .then(res => {
+      .then(async res => {
         this.node = res;
         this.pluginsURL = this.pluginService().createPluginURL(this.node);
-        return this.pluginService()
+        return await this.pluginService()
           .find(this.pluginsURL, id)
           .then(res => {
             return res;
           });
       });
+  }
+
+  public async setPlugin(method, key) {
+    return await this.getPlugin(key).then(res => {
+      switch (method) {
+        case 0: {
+          this.endpoint.getResource['name'] = res.name;
+          this.endpoint.getResource['params'] = this.generatePluginJSON(res);
+          this.currentPlugins.getPlugin = res;
+          break;
+        }
+        case 1: {
+          this.endpoint.postResource['name'] = res.name;
+          this.endpoint.postResource['params'] = this.generatePluginJSON(res);
+          this.currentPlugins.postPlugin = res;
+          break;
+        }
+        case 2: {
+          this.endpoint.putResource['name'] = res.name;
+          this.endpoint.putResource['params'] = this.generatePluginJSON(res);
+          this.currentPlugins.putPlugin = res;
+          break;
+        }
+        case 3: {
+          this.endpoint.patchResource['name'] = res.name;
+          this.endpoint.patchResource['params'] = this.generatePluginJSON(res);
+          this.currentPlugins.patchPlugin = res;
+          break;
+        }
+        case 4: {
+          this.endpoint.deleteResource['name'] = res.name;
+          this.endpoint.deleteResource['params'] = this.generatePluginJSON(res);
+          this.currentPlugins.deletePlugin = res;
+          break;
+        }
+      }
+    });
   }
 
   public previousState(): void {

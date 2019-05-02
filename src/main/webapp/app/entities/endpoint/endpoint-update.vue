@@ -40,14 +40,7 @@
                             <b-tabs pills card vertical>
                                 <b-tab title="GET" active>
                                     <b-dropdown id="dropdown-2" text="Select Plugin" class="m-md-4">
-                                        <b-dropdown-item v-for="(plugin, key) in plugins"
-                                                         v-on:click="
-                                                         getPlugin(key).then(function(res) {
-                                                            endpoint.getResource['params'] = generatePluginJSON(res);
-
-                                                            currentPlugins.getPlugin = res;
-                                                         })"
-                                        >{{plugin.name}} - {{plugin.details}}</b-dropdown-item>
+                                        <b-dropdown-item v-for="(plugin, key) in plugins"v-on:click="setPlugin(GET, key)">{{plugin.name}} - {{plugin.details}}</b-dropdown-item>
                                     </b-dropdown>
                                     <h1>{{currentPlugins.getPlugin["name"]}}</h1>
                                     <div v-for="(param, key) in currentPlugins.getPlugin.params" class="form-group">
@@ -57,7 +50,7 @@
                                 </b-tab>
                                 <b-tab title="POST">
                                     <b-dropdown id="dropdown-2" text="Select Plugin" class="m-md-4">
-                                        <b-dropdown-item v-for="(plugin, key) in plugins" v-on:click="getPlugin(key).then(function(res) { endpoint.getResource['params'] = 'null'; currentPlugins.postPlugin = res; })">{{plugin.name}} - {{plugin.details}}</b-dropdown-item>
+                                        <b-dropdown-item v-for="(plugin, key) in plugins"v-on:click="setPlugin(POST, key)">{{plugin.name}} - {{plugin.details}}</b-dropdown-item>
                                     </b-dropdown>
                                     <h1>{{currentPlugins.postPlugin["name"]}}</h1>
                                     <div v-for="(param, key) in currentPlugins.postPlugin.params" class="form-group">
@@ -67,32 +60,32 @@
                                 </b-tab>
                                 <b-tab title="PUT">
                                     <b-dropdown id="dropdown-2" text="Select Plugin" class="m-md-4">
-                                        <b-dropdown-item v-for="(plugin, key) in plugins" v-on:click="getPlugin(key).then(function(res) { endpoint.getResource['params'] = 'null'; currentPlugins.putPlugin = res; })">{{plugin.name}} - {{plugin.details}}</b-dropdown-item>
+                                        <b-dropdown-item v-for="(plugin, key) in plugins"v-on:click="setPlugin(PUT, key)">{{plugin.name}} - {{plugin.details}}</b-dropdown-item>
                                     </b-dropdown>
                                     <h1>{{currentPlugins.putPlugin["name"]}}</h1>
                                     <div v-for="(param, key) in currentPlugins.putPlugin.params" class="form-group">
                                         <label class="form-control-label" for="put-param-name">{{param.name}}</label>
-                                        <input type="text" class="form-control" name="putRequest" id="put-param-name"  v-model="endpoint.postResource.params[key].second"/>
+                                        <input type="text" class="form-control" name="putRequest" id="put-param-name"  v-model="endpoint.putResource.params[key].second"/>
                                     </div>
                                 </b-tab>
                                 <b-tab title="PATCH">
                                     <b-dropdown id="dropdown-2" text="Select Plugin" class="m-md-4">
-                                        <b-dropdown-item v-for="(plugin, key) in plugins" v-on:click="getPlugin(key).then(function(res) { endpoint.getResource['params'] = 'null'; currentPlugins.patchPlugin = res; })">{{plugin.name}} - {{plugin.details}}</b-dropdown-item>
+                                        <b-dropdown-item v-for="(plugin, key) in plugins"v-on:click="setPlugin(PATCH, key)">{{plugin.name}} - {{plugin.details}}</b-dropdown-item>
                                     </b-dropdown>
                                     <h1>{{currentPlugins.patchPlugin["name"]}}</h1>
                                     <div v-for="(param, key) in currentPlugins.patchPlugin.params" class="form-group">
                                         <label class="form-control-label" for="patch-param-name">{{param.name}}</label>
-                                        <input type="text" class="form-control" name="patchRequest" id="patch-param-name"  v-model="endpoint.postResource.params[key].second"/>
+                                        <input type="text" class="form-control" name="patchRequest" id="patch-param-name"  v-model="endpoint.patchResource.params[key].second"/>
                                     </div>
                                 </b-tab>
                                 <b-tab title="DELETE">
                                     <b-dropdown id="dropdown-2" text="Select Plugin" class="m-md-4">
-                                        <b-dropdown-item v-for="(plugin, key) in plugins" v-on:click="getPlugin(key).then(function(res) { endpoint.getResource['params'] = 'null'; currentPlugins.deletePlugin = res; })">{{plugin.name}} - {{plugin.details}}</b-dropdown-item>
+                                        <b-dropdown-item v-for="(plugin, key) in plugins"v-on:click="setPlugin(DELETE, key)">{{plugin.name}} - {{plugin.details}}</b-dropdown-item>
                                     </b-dropdown>
                                     <h1>{{currentPlugins.deletePlugin["name"]}}</h1>
                                     <div v-for="(param, key) in currentPlugins.deletePlugin.params" class="form-group">
                                         <label class="form-control-label" for="patch-param-name">{{param.name}}</label>
-                                        <input type="text" class="form-control" name="deleteRequest" id="delete-param-name"  v-model="endpoint.postResource.params[key].second"/>
+                                        <input type="text" class="form-control" name="deleteRequest" id="delete-param-name"  v-model="endpoint.deleteResource.params[key].second"/>
                                     </div>
                                 </b-tab>
                             </b-tabs>

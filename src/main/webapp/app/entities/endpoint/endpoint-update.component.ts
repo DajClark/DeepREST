@@ -36,21 +36,20 @@ export default class EndpointUpdate extends Vue {
   @Inject('pluginService')
   private pluginService: () => PluginService;
   public plugins: IPlugin[] = [];
-  public currentPlugin: IPlugin = new Plugin();
+  public currentPlugins: HttpMethods = new HttpMethods();
   public isSaving = false;
   public endpointURL: string = null;
   public pluginsURL: string = null;
   public endpointID: string = null;
 
-  beforeRouteEnter(to, from, next) {
-    next(vm => {
-      if (to.params.endpointId) {
-        vm.retrieveEndpoint(to.params.nodeId);
-        vm.retrieveAllPlugins();
-      } else {
-        vm.retrieveAllPlugins();
-      }
-    });
+  created() {
+    if (this.$route.params.endpointId) {
+      this.retrieveEndpoint(this.$route.params.nodeId).then(() => {
+        this.retrieveAllPlugins();
+      });
+    } else {
+      this.retrieveAllPlugins();
+    }
   }
 
   public save(): void {
@@ -79,14 +78,14 @@ export default class EndpointUpdate extends Vue {
     }
   }
 
-  public retrieveEndpoint(nodeId) {
-    this.nodeService()
+  public async retrieveEndpoint(nodeId) {
+    await this.nodeService()
       .find(nodeId)
-      .then(res => {
+      .then(async res => {
         this.node = res;
         this.endpointURL = this.endpointService().createEndpointURL(this.node);
         this.endpointID = this.$route.params.endpointId;
-        this.endpointService()
+        await this.endpointService()
           .find(this.endpointURL, this.$route.params.endpointId)
           .then(res => {
             this.endpoint = res;
@@ -105,26 +104,47 @@ export default class EndpointUpdate extends Vue {
           .then(res => {
             this.plugins = res.data;
             var index;
+            console.log(this.endpoint);
             for (index = 0; index < this.plugins.length; ++index) {
-              if (this.endpoint.getResource['name'] === this.plugins[index].name) {
-                console.log(this.endpoint.getResource['name']);
-                this.getPlugin(index);
-              }
+              if (this.endpoint.getResource['name'] === this.plugins[index].name)
+                this.getPlugin(index).then(res => {
+                  this.currentPlugins.getPlugin = res;
+                });
+
+              if (this.endpoint.postResource['name'] === this.plugins[index].name)
+                this.getPlugin(index).then(res => {
+                  this.currentPlugins.postPlugin = res;
+                });
+
+              if (this.endpoint.putResource['name'] === this.plugins[index].name)
+                this.getPlugin(index).then(res => {
+                  this.currentPlugins.putPlugin = res;
+                });
+
+              if (this.endpoint.patchResource['name'] === this.plugins[index].name)
+                this.getPlugin(index).then(res => {
+                  this.currentPlugins.patchPlugin = res;
+                });
+
+              if (this.endpoint.deleteResource['name'] === this.plugins[index].name)
+                this.getPlugin(index).then(res => {
+                  this.currentPlugins.deletePlugin = res;
+                });
             }
           });
       });
   }
 
-  public getPlugin(id): void {
-    this.nodeService()
+  public async getPlugin(id) {
+    return this.nodeService()
       .find(this.node.id)
       .then(res => {
         this.node = res;
         this.pluginsURL = this.pluginService().createPluginURL(this.node);
-        this.pluginService()
+        return this.pluginService()
           .find(this.pluginsURL, id)
           .then(res => {
-            this.currentPlugin = res;
+            return res;
           });
       });
   }
@@ -132,4 +152,24 @@ export default class EndpointUpdate extends Vue {
   public previousState(): void {
     this.$router.go(-1);
   }
+
+  public generatePluginJSON(plugin: Plugin): JSON {
+    let string: String = '';
+    Object.keys(plugin.params).forEach(function(key) {
+      string += '{\n' + '"first": "' + plugin.params[key]['name'] + '",\n' + '"second": "' + plugin.params[key]['details'] + '"\n' + '},\n';
+    });
+    return JSON.parse(
+      '[\n' +
+      string.substring(0, string.length - 2) + // remove comma from last iteration
+        ']'
+    );
+  }
+}
+
+export class HttpMethods {
+  public getPlugin: IPlugin = new Plugin();
+  public postPlugin: IPlugin = new Plugin();
+  public putPlugin: IPlugin = new Plugin();
+  public patchPlugin: IPlugin = new Plugin();
+  public deletePlugin: IPlugin = new Plugin();
 }

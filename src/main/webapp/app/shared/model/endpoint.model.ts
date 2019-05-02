@@ -1,21 +1,21 @@
 export interface IEndpoint {
   name?: string;
   details?: string;
-  getResource?: object;
-  postResource?: object;
-  putResource?: object;
-  patchResource?: object;
-  deleteResource?: object;
+  getResource?: JSON;
+  postResource?: JSON;
+  putResource?: JSON;
+  patchResource?: JSON;
+  deleteResource?: JSON;
 }
 
 export class Endpoint implements IEndpoint {
   constructor(
     public name?: string,
     public details?: string,
-    public getResource?: object,
-    public postResource?: object,
-    public putResource?: object,
-    public patchResource?: object,
-    public deleteResource?: object
+    public getResource?: JSON,
+    public postResource?: JSON,
+    public putResource?: JSON,
+    public patchResource?: JSON,
+    public deleteResource?: JSON
   ) {}
 }

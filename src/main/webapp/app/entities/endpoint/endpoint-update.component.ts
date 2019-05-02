@@ -93,21 +93,21 @@ export default class EndpointUpdate extends Vue {
       });
   }
 
-  public retrieveAllPlugins(): void {
-    this.nodeService()
+  public async retrieveAllPlugins() {
+    await this.nodeService()
       .find(this.$route.params.nodeId)
-      .then(res => {
+      .then(async res => {
         this.node = res;
         this.pluginsURL = this.pluginService().createPluginURL(this.node);
-        this.pluginService()
+        await this.pluginService()
           .retrieve(this.pluginsURL)
-          .then(res => {
+          .then(async res => {
             this.plugins = res.data;
             var index;
             console.log(this.endpoint);
             for (index = 0; index < this.plugins.length; ++index) {
               if (this.endpoint.getResource['name'] === this.plugins[index].name)
-                this.getPlugin(index).then(res => {
+                await this.getPlugin(index).then(res => {
                   this.currentPlugins.getPlugin = res;
                 });
 
@@ -136,17 +136,49 @@ export default class EndpointUpdate extends Vue {
   }
 
   public async getPlugin(id) {
-    return this.nodeService()
+    return await this.nodeService()
       .find(this.node.id)
-      .then(res => {
+      .then(async res => {
         this.node = res;
         this.pluginsURL = this.pluginService().createPluginURL(this.node);
-        return this.pluginService()
+        return await this.pluginService()
           .find(this.pluginsURL, id)
           .then(res => {
             return res;
           });
       });
+  }
+
+  public async setPlugin(method, key) {
+    return await this.getPlugin(key).then(res => {
+      switch (method) {
+        case 0:
+          this.endpoint.getResource['name'] = res.name;
+          this.endpoint.getResource['params'] = this.generatePluginJSON(res);
+          this.currentPlugins.getPlugin = res;
+          break;
+        case 1:
+          this.endpoint.postResource['name'] = res.name;
+          this.endpoint.postResource['params'] = this.generatePluginJSON(res);
+          this.currentPlugins.postPlugin = res;
+          break;
+        case 2:
+          this.endpoint.putResource['name'] = res.name;
+          this.endpoint.putResource['params'] = this.generatePluginJSON(res);
+          this.currentPlugins.putPlugin = res;
+          break;
+        case 3:
+          this.endpoint.patchResource['name'] = res.name;
+          this.endpoint.patchResource['params'] = this.generatePluginJSON(res);
+          this.currentPlugins.patchPlugin = res;
+          break;
+        case 4:
+          this.endpoint.deleteResource['name'] = res.name;
+          this.endpoint.deleteResource['params'] = this.generatePluginJSON(res);
+          this.currentPlugins.deletePlugin = res;
+          break;
+      }
+    });
   }
 
   public previousState(): void {

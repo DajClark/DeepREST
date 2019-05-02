@@ -110,7 +110,6 @@ export default class EndpointUpdate extends Vue {
           .then(async res => {
             this.plugins = res.data;
             var index;
-            console.log(this.endpoint);
             for (index = 0; index < this.plugins.length; ++index) {
               if (this.endpoint.getResource['name'] === this.plugins[index].name)
                 await this.getPlugin(index).then(res => {

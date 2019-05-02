@@ -4,11 +4,11 @@
             <b-nav-item-dropdown
                 id="node-menu"
                 active-class="active"
-                class="pointer sidebar-dropdown"
+                class="pointer sidebar-dropdown noCaret"
                 >
                 <span slot="button-content"  class="navbar-dropdown-menu" v-on:click="sidebarExpand(), retrieveAllNodes()">
                     <font-awesome-icon icon="hdd"/>
-                    <span v-text="$t('sidebar.nodes')">Node</span>
+                    <span v-text="$t('sidebar.nodes')">Node</span><font-awesome-icon icon="caret-down"/>
                 </span>
                 <b-dropdown-item v-for="(value) in nodes" :key="value.id" v-on:click="refreshCurrentNode(parseInt(value.id));">
                     {{value.name}}
@@ -60,10 +60,6 @@
         width: 100%;
     }
 
-    .b-navbar ul {
-
-    }
-
     .sidebar {
         height: 100%;
         top: 0 !important;
@@ -81,12 +77,18 @@
         padding: 0.5em;
     }
 
-    .sidebar .navbar-nav .nav-item {
+    .sidebar .navbar-nav .nav-item, .sidebar .sidebar-item {
         font-size: 1.4em;
     }
 
-    .sidebar a.nav-link {
+    .sidebar a.nav-link, .sidebar .sidebar-item {
         font-weight: 400;
+        color: rgba(0, 0, 0, 0.5);
+    }
+
+    .sidebar-item:hover {
+        color: rgba(0, 0, 0, 0.7);
+        text-decoration: none;
     }
 
     /* ==========================================================================
@@ -94,16 +96,16 @@
         ========================================================================== */
 
     #sidebar.active {
-        min-width: 70px;
-        max-width: 70px;
+        min-width: 75px;
+        max-width: 85px;
         text-align: center;
     }
 
-    #sidebar.active .navbar-nav .nav-item {
+    #sidebar.active .navbar-nav .nav-item, #sidebar.active .sidebar-item {
         font-size: 0.9em;
     }
 
-    #sidebar.active ul.navbar-nav {
+    #sidebar.active ul.navbar-nav, #sidebar.active .sidebar-item {
         padding: 16px 3px;
     }
 
@@ -112,12 +114,13 @@
     }
 
     #sidebar.active .sidebar-dropdown .dropdown-toggle::after {
-        top: auto;
-        bottom: 10px;
-        right: 50%;
-        -webkit-transform: translateX(50%);
-        -ms-transform: translateX(50%);
-        transform: translateX(50%);
+        content: none !important;
+        /*top: auto;*/
+        /*bottom: 10px;*/
+        /*right: 50%;*/
+        /*-webkit-transform: translateX(50%);*/
+        /*-ms-transform: translateX(50%);*/
+        /*transform: translateX(50%);*/
     }
 
     /* ==========================================================================
@@ -157,11 +160,16 @@
     }
 
     #sidebar .dropdown-toggle::after {
-        display: block;
-        position: absolute;
-        top: 50%;
-        right: 20px;
-        transform: translateY(-50%);
+        content: none !important;
+        /*display: block;*/
+        /*position: absolute;*/
+        /*top: 50%;*/
+        /*right: 20px;*/
+        /*transform: translateY(-50%);*/
+    }
+
+    .sidebar ::after {
+        content: none !important;
     }
 
     /*!* ==========================================================================*/

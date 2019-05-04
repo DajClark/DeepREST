@@ -1,9 +1,10 @@
 import Component from 'vue-class-component';
-import { Inject, Vue } from 'vue-property-decorator';
+import { Inject } from 'vue-property-decorator';
 import LoginService from '@/account/login.service';
+import App from '@/app.component';
 
 @Component
-export default class Home extends Vue {
+export default class Home extends App {
   @Inject('loginService')
   private loginService: () => LoginService;
 

@@ -6,7 +6,7 @@
                     <strong>Failed to sign in!</strong> Please check your credentials and try again.
                 </b-alert>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-12 box-unique">
                 <b-form role="form" v-on:submit.prevent="doLogin()">
                     <b-form-group v-bind:label="$t('global.form.username')" label-for="username">
                         <b-form-input id="username" type="text" name="username" autofocus v-bind:placeholder="$t('global.form[\'username.placeholder\']')" v-model="login">
@@ -41,3 +41,12 @@
 </template>
 <script lang="ts" src="./login-form.component.ts">
 </script>
+
+<style scoped>
+    .box-unique {
+        border: #404040 solid;
+        border-radius: 5px;
+        padding-bottom: 10px;
+        padding-top: 10px;
+    }
+</style>

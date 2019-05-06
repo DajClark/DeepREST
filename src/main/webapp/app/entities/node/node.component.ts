@@ -1,12 +1,12 @@
 import { mixins } from 'vue-class-component';
 import { Component, Inject, Vue } from 'vue-property-decorator';
-import { INode } from '@/shared/model/node.model';
+import { INode, Node } from '@/shared/model/node.model';
 import AlertService from '@/shared/alert/alert.service';
 
 import NodeService from './node.service';
 
 @Component
-export default class Node extends Vue {
+export default class Nodes extends Vue {
   @Inject('alertService')
   private alertService: () => AlertService;
   @Inject('nodeService')
@@ -20,6 +20,9 @@ export default class Node extends Vue {
   public reverse = true;
   public totalItems = 0;
   public nodes: INode[] = [];
+  public node: INode = new Node();
+  public statusURL;
+  public checkState;
 
   public dismissCountDown: number = this.$store.getters.dismissCountDown;
   public dismissSecs: number = this.$store.getters.dismissSecs;
@@ -93,6 +96,16 @@ export default class Node extends Vue {
       this.previousPage = page;
       this.transition();
     }
+  }
+
+  public checkStatus(id) {
+    this.nodeService()
+      .find(id)
+      .then(res => {
+        this.node = res;
+        this.statusURL = this.nodeService().createStatusURL(this.node);
+        this.checkState = this.nodeService().status(this.statusURL);
+      });
   }
 
   public transition(): void {

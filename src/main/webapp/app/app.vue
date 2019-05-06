@@ -13,7 +13,7 @@
         <login-form></login-form>
       </b-modal>
 
-      <jhi-footer class="fixed-bottom"></jhi-footer>
+      <!--<jhi-footer class="fixed-bottom"></jhi-footer>-->
   </div>
 </template>
 

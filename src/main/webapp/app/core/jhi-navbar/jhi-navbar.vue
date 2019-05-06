@@ -12,10 +12,16 @@
         </div>
         <b-collapse is-nav id="header-tabs">
             <b-navbar-nav class="ml-auto">
-                <b-nav-item to="/" exact>
+                <b-nav-item v-if="!authenticated" to="/" exact>
                     <span>
                         <font-awesome-icon icon="home" />
                         <span v-text="$t('global.menu.home')">Home</span>
+                    </span>
+                </b-nav-item>
+                <b-nav-item v-if="authenticated" to="/" exact>
+                    <span>
+                        <font-awesome-icon icon="home" />
+                        <span v-text="$t('global.menu.dashboard')">Dashboard</span>
                     </span>
                 </b-nav-item>
                 <b-nav-item-dropdown
@@ -111,6 +117,10 @@
                         <font-awesome-icon icon="clock" />
                         <span v-text="$t('global.menu.account.password')">Password</span>
                     </b-dropdown-item>
+                    <b-dropdown-item to="/register" tag="b-dropdown-item" id="register" v-if="hasAnyAuthority('ROLE_ADMIN')">
+                        <font-awesome-icon icon="user-plus" />
+                        <span v-text="$t('global.menu.account.register')">Add User</span>
+                    </b-dropdown-item>
                     <b-dropdown-item v-if="authenticated"  v-on:click="logout()" id="logout">
                         <font-awesome-icon icon="sign-out-alt" />
                         <span v-text="$t('global.menu.account.logout')">Sign out</span>
@@ -118,10 +128,6 @@
                     <b-dropdown-item v-if="!authenticated"  v-on:click="openLogin()" id="login">
                         <font-awesome-icon icon="sign-in-alt" />
                         <span v-text="$t('global.menu.account.login')">Sign in</span>
-                    </b-dropdown-item>
-                    <b-dropdown-item to="/register" tag="b-dropdown-item" id="register" v-if="!authenticated">
-                        <font-awesome-icon icon="user-plus" />
-                        <span v-text="$t('global.menu.account.register')">Register</span>
                     </b-dropdown-item>
                 </b-nav-item-dropdown>
             </b-navbar-nav>

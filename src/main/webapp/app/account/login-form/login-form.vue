@@ -6,7 +6,7 @@
                     <strong>Failed to sign in!</strong> Please check your credentials and try again.
                 </b-alert>
             </div>
-            <div class="col-md-12 box-unique">
+            <div class="col-md-8">
                 <b-form role="form" v-on:submit.prevent="doLogin()">
                     <b-form-group v-bind:label="$t('global.form.username')" label-for="username">
                         <b-form-input id="username" type="text" name="username" autofocus v-bind:placeholder="$t('global.form[\'username.placeholder\']')" v-model="login">
@@ -31,8 +31,7 @@
                 </div>
                 <div>
                     <b-alert show variant="warning">
-                        You don't have an account yet ?
-                        <b-link :to="'/register'" class="alert-link" v-text="$t('global.messages.info.register.link')">Register a new account</b-link>
+                        You don't have an account yet? Please contact the network administrator to register an account.
                     </b-alert>
                 </div>
             </div>
@@ -41,12 +40,3 @@
 </template>
 <script lang="ts" src="./login-form.component.ts">
 </script>
-
-<style scoped>
-    .box-unique {
-        border: #404040 solid;
-        border-radius: 5px;
-        padding-bottom: 10px;
-        padding-top: 10px;
-    }
-</style>

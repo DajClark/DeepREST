@@ -63,4 +63,15 @@ export default class NodeService {
       });
     });
   }
+
+  public status(url): boolean {
+    axios.get(`${url}`).then(function(res) {
+      return res.status;
+    });
+    return false;
+  }
+
+  public createStatusURL(node): string {
+    return `http://${node.ip}:${node.port}/api/status`;
+  }
 }

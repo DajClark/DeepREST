@@ -1,9 +1,10 @@
 {
   "global": {
-    "title": "DeepREST - Endpoint Configuration Manager",
+    "title": "DeepREST",
     "browsehappy": "You are using an <strong>outdated</strong> browser. Please <a href=\"http://browsehappy.com/?locale=en\">upgrade your browser</a> to improve your experience.",
     "menu": {
       "home": "Home",
+      "dashboard": "Dashboard",
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entities",
@@ -17,7 +18,7 @@
         "sessions": "Sessions",
         "login": "Sign in",
         "logout": "Sign out",
-        "register": "Register"
+        "register": "Add User"
       },
       "admin": {
         "main": "Administration",
@@ -54,8 +55,8 @@
           "suffix": ", you can try the default accounts:<br/>- Administrator (login=\"admin\" and password=\"admin\") <br/>- User (login=\"user\" and password=\"user\")."
         },
         "register": {
-          "noaccount": "You don't have an account yet?",
-          "link": "Register a new account"
+          "noaccount": "Don't have an account yet?",
+          "link": "Please contact the administrator to register an account"
         }
       },
       "error": {

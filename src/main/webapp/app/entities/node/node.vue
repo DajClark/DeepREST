@@ -28,7 +28,6 @@
                     <th v-on:click="changeOrder('user')"><span v-text="$t('deepRestApp.node.user')">User</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
                     <th v-on:click="changeOrder('password')"><span v-text="$t('deepRestApp.node.password')">Password</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
                     <th v-on:click="changeOrder('port')"><span v-text="$t('deepRestApp.node.port')">Port</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
-                    <th>Status</th>
                     <th></th>
                 </tr>
                 </thead>
@@ -44,8 +43,6 @@
                     <td>{{node.user}}</td>
                     <td>{{node.password}}</td>
                     <td>{{node.port}}</td>
-                    <td v-if="checkStatus(node.id)">Up</td>
-                    <td v-if="!checkStatus(node.id)">Down</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <router-link :to="{name: 'NodeView', params: {nodeId: node.id}}" tag="button" class="btn btn-info btn-sm">
@@ -83,3 +80,13 @@
 
 <script lang="ts" src="./node.component.ts">
 </script>
+
+<style>
+    @media (max-width: 767px) {
+        .create-node {
+            width: 85px;
+            height: 50px;
+        }
+    }
+
+</style>

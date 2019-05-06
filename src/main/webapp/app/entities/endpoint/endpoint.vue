@@ -76,3 +76,12 @@
 
 <script lang="ts" src="./endpoint.component.ts">
 </script>
+
+<style>
+    @media (max-width: 767px) {
+        .create-endpoint {
+            width: 85px;
+            height: 50px;
+        }
+    }
+</style>

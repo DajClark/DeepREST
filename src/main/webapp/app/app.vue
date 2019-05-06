@@ -5,7 +5,7 @@
     </div>
       <div class="d-flex flex-container">
           <div><sidebar></sidebar></div>
-          <div class="p-5 flex-fill router-view"><router-view class="flex-grow-1"></router-view></div>
+          <div class="p-5 flex-fill router-view"><router-view :key="$route.fullPath" class="flex-grow-1"></router-view></div>
       </div>
 
       <b-modal id="login-page" hide-footer lazy>

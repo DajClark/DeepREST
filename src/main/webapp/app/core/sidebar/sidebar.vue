@@ -16,7 +16,7 @@
             </b-nav-item-dropdown>
             <span class="node-title">{{currentNode.name}}</span>
             <router-link :to="{name: 'Endpoints', params: {nodeId: currentNode.id}}" v-if="currentNode.id != null" class="sidebar-item">
-                <span v-on:click="refresh()">
+                <span>
                     <font-awesome-icon icon="th-list"/>
                     <span v-text="$t('sidebar.endpoints')">Endpoints</span>
                 </span>
